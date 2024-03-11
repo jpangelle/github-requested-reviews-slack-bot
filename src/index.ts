@@ -1,5 +1,15 @@
-import { config } from 'dotenv';
+import { Request, Response } from '@google-cloud/functions-framework';
+import { getGithubRequestedReviews } from './getGithubRequestedReviews';
+import { getMessage } from './getMessage';
+import { sendSlackMessage } from './sendSlackMessage';
 
-config();
+async function main(request: Request, response: Response) {
+  const pullRequestsUrls = await getGithubRequestedReviews();
 
-console.log('hello world');
+  const message = getMessage(pullRequestsUrls);
+
+  await sendSlackMessage(message);
+  response.send('OK');
+}
+
+export { main };

@@ -22,6 +22,7 @@ module.exports = {
     ],
     'import/prefer-default-export': 'off',
     'prettier/prettier': 'error',
+    camelcase: 'off',
   },
   settings: {
     'import/resolver': {
